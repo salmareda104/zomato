@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import pickle as pkl
 import gzip
-# Display the result
-st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 #from sklearn.ensemble import RandomForestClassifier
 #from xgboost import XGBClassifier
 #from sklearn.preprocessing import StandardScaler
