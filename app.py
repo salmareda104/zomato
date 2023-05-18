@@ -96,27 +96,26 @@ if feedback:
 
 
 
-#df_new = pd.DataFrame ({'location': [location], 'type_of_name':[type_of_name], "rest_type_ge": [rest_type_ge], 'online_order': [online_order_value], 'book_table':[book_table_value], 'cost': [cost], 'count_cuisines': [count_cuisines]})
+df_new = np.array({'location': [location], 'type_of_name':[type_of_name], "rest_type_ge": [rest_type_ge], 'online_order': [online_order_value], 'book_table':[book_table_value], 'cost': [cost], 'count_cuisines': [count_cuisines]})
 # load transformer
-#def decompress_file(input_file, output_file):
- #   with gzip.open(input_file, 'rb') as f_in:
-  #      with open(output_file, 'wb') as f_out:
-  #          f_out.write(f_in.read())
+def decompress_file(input_file, output_file):
+     with gzip.open(input_file, 'rb') as f_in:
+            with open(output_file, 'wb') as f_out:
+                f_out.write(f_in.read())
 
 
 # Usage example
-#input_file = 'zomato_transformer.pkl.gz'
-#decompressed_file = 'zomato_transformer.pkl'
-#decompress_file(input_file, decompressed_file)
-# load transformer 
+input_file = 'zomato_transformer.pkl.gz'
+decompressed_file = 'zomato_transformer.pkl'
+decompress_file(input_file, decompressed_file)
 
-# Load the transformer or model
-#transformer = pkl.load(open(decompressed_file, 'rb'))
+# Load the transformer 
+transformer = pkl.load(open(decompressed_file, 'rb'))
 
-#st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
+st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 
 # apply transformer on inputs
-#x_new = transformer.transform(df_new)
+x_new = transformer.transform(df_new)
 #transformed_data = transformer.transform(df_new)
 
 
@@ -124,16 +123,6 @@ if feedback:
 def list_transformer(column):
     return np.array(column.tolist())
 
-# Load the transformer
-input_file = 'zomato_transformer.pkl.gz'
-decompressed_file = 'zomato_transformer.pkl'
-with gzip.open(input_file, 'rb') as f_in:
-    with open(decompressed_file, 'wb') as f_out:
-        f_out.write(f_in.read())
-transformer = pkl.load(open(decompressed_file, 'rb'))
-df_new = pd.DataFrame ({'location': [location], 'type_of_name':[type_of_name], "rest_type_ge": [rest_type_ge], 'online_order': [online_order_value], 'book_table':[book_table_value], 'cost': [cost], 'count_cuisines': [count_cuisines]})
-
-transformed_data = transformer.transform(df_new)
 
 
 # Usage example
