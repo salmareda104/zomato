@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle as pkl
 import gzip
-import scikit_learn
+#import scikit_learn
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.preprocessing import StandardScaler
