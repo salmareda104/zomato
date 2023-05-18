@@ -96,8 +96,7 @@ if feedback:
     st.info("Caution: This is just a prediction.") 
 
 
-
-df_new = np.array({'location': [location], 'type_of_name':[type_of_name], "rest_type_ge": [rest_type_ge], 'online_order': [online_order_value], 'book_table':[book_table_value], 'cost': [cost], 'count_cuisines': [count_cuisines]})
+df_new = pd.DataFrame({'location': [location], 'type_of_name':[type_of_name], "rest_type_ge": [rest_type_ge], 'online_order': [online_order_value], 'book_table':[book_table_value], 'cost': [cost], 'count_cuisines': [count_cuisines]})
 # load transformer
 def decompress_file(input_file, output_file):
      with gzip.open(input_file, 'rb') as f_in:
