@@ -98,7 +98,7 @@ df_new = pd.DataFrame ({'location': [location], 'type_of_name':[type_of_name], "
 # load transformer
 trans = pkl.load(open('zomato_transformer.pkl', 'rb'))
 
-apply transformer on inputs
+# apply transformer on inputs
 x_new = transformer.transform (df_new)
 
 # load model                      
