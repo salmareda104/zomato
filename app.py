@@ -107,9 +107,11 @@ input_file = 'zomato_transformer.pkl.gz'
 decompressed_file = 'zomato_transformer.pkl'
 decompress_file(input_file, decompressed_file)
 # load transformer 
-st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 
-#trans = pkl.load(open('zomato_transformer.pkl', 'rb'))
+# Load the transformer or model
+transformer = pickle.load(open(decompressed_file, 'rb'))
+
+#st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 
 # apply transformer on inputs
 x_new = decompressed_file.transform (df_new)
@@ -120,10 +122,10 @@ input_file = 'zomato.pkl.gz'
 decompressed_file = 'zomato.pkl'
 decompress_file(input_file, decompressed_file)
 # load model 
-st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
+#st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 
                      
-#loaded_model = pkl.load(open('zomato.pkl', 'rb'))
+loaded_model = pkl.load(open('decompressed_file.pkl', 'rb'))
 
 
 #predict the output
