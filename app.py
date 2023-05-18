@@ -115,7 +115,7 @@ transformer = pkl.load(open(decompressed_file, 'rb'))
 st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 
 # apply transformer on inputs
-x_new = transformer.transform (df_new)
+x_new = transformer.transform(pd.DataFrame(df_new))
 #transformed_data = transformer.transform(df_new)
 
 
