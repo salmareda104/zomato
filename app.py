@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import pickle as pkl
+import gzip
+# Display the result
+st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 #from sklearn.ensemble import RandomForestClassifier
 #from xgboost import XGBClassifier
 #from sklearn.preprocessing import StandardScaler
@@ -94,19 +97,39 @@ if feedback:
 
 df_new = pd.DataFrame ({'location': [location], 'type_of_name':[type_of_name], "rest_type_ge": [rest_type_ge], 'online_order': [online_order_value], 'book_table':[book_table_value], 'cost': [cost], 'count_cuisines': [count_cuisines]})
 
+def decompress_file(input_file, output_file):
+    with gzip.open(input_file, 'rb') as f_in:
+        with open(output_file, 'wb') as f_out:
+            f_out.write(f_in.read())
 
 # load transformer
-trans = pkl.load(open('zomato_transformer.pkl', 'rb'))
+
+# Usage example
+input_file = 'zomato_transformer.pkl.gz'
+decompressed_file = 'zomato_transformer.pkl'
+decompress_file(input_file, decompressed_file)
+# load transformer 
+st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
+
+#trans = pkl.load(open('zomato_transformer.pkl', 'rb'))
 
 # apply transformer on inputs
 x_new = transformer.transform (df_new)
 
-# load model                      
-loaded_model = pkl.load(open('zomato.pkl', 'rb'))
+
+# Usage example
+input_file = 'zomato.pkl.gz'
+decompressed_file = 'zomato.pkl'
+decompress_file(input_file, decompressed_file)
+# load model 
+st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
+
+                     
+#loaded_model = pkl.load(open('zomato.pkl', 'rb'))
 
 
 #predict the output
-predictx= loaded_model.predict(x_new)[0]
+predict= decompressed_file.predict(x_new)[0]
 
 
 if st.button("Predict"):
