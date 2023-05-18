@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle as pkl
 import gzip
+import numpy as np
 from sklearn.preprocessing import FunctionTransformer, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 #import scikit_learn
