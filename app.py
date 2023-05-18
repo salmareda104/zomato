@@ -112,7 +112,7 @@ st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'"
 #trans = pkl.load(open('zomato_transformer.pkl', 'rb'))
 
 # apply transformer on inputs
-x_new = transformer.transform (df_new)
+x_new = decompressed_file.transform (df_new)
 
 
 # Usage example
