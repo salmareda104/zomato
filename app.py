@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import pickle as pkl
 import gzip
-import scikit_learn
-from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
+#import scikit_learn
+#from sklearn.ensemble import RandomForestClassifier
+#from xgboost import XGBClassifier
+#from sklearn.preprocessing import StandardScaler
+#from sklearn.model_selection import train_test_split
 
 st.set_page_config(
     page_title="Zomato App",layout="centered",initial_sidebar_state="expanded")
