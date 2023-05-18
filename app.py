@@ -109,7 +109,7 @@ decompress_file(input_file, decompressed_file)
 # load transformer 
 
 # Load the transformer or model
-transformer = pickle.load(open(decompressed_file, 'rb'))
+transformer = pkl.load(open(decompressed_file, 'rb'))
 
 #st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 
