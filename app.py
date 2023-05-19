@@ -73,7 +73,7 @@ book_table_value = 1 if book_table == 'yes' else 0
 
 cost=st.slider('Cost For Two',1,10000,100)
 
-count_cuisines = st.radio("Number Of Cuisines ",1,8)
+count_cuisines = st.slider("Number Of Cuisines ",1,8)
 
 
 st.sidebar.subheader("About App")
