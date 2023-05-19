@@ -5,11 +5,6 @@ import gzip
 import numpy as np
 from sklearn.preprocessing import FunctionTransformer, OneHotEncoder
 from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-
 st.set_page_config(
     page_title="Zomato App",layout="centered",initial_sidebar_state="expanded")
 
@@ -28,7 +23,7 @@ st.subheader('by Salma Reda ')
 #take input from user     
 # following lines create boxes in which user can enter data required to make prediction
 
-location = st.selectbox('Name of Location', ('Banashankari', 'Basavanagudi', 'Mysore Road', 'Jayanagar',
+location = st.selectbox('Name of Location', ['Banashankari', 'Basavanagudi', 'Mysore Road', 'Jayanagar',
        'Kumaraswamy Layout', 'Rajarajeshwari Nagar', 'Vijay Nagar',
        'Uttarahalli', 'JP Nagar', 'South Bangalore', 'City Market',
        'Bannerghatta Road', 'BTM', 'Kanakapura Road', 'Bommanahalli',
@@ -53,23 +48,23 @@ location = st.selectbox('Name of Location', ('Banashankari', 'Basavanagudi', 'My
        'Malleshwaram', 'Sanjay Nagar', 'Sadashiv Nagar',
        'Basaveshwara Nagar', 'Rajajinagar', 'Yeshwantpur', 'New BEL Road',
        'West Bangalore', 'Magadi Road', 'Yelahanka', 'Sahakara Nagar',
-       'Jalahalli', 'Hebbal', 'Nagarbhavi', 'Peenya', 'KR Puram'))
+       'Jalahalli', 'Hebbal', 'Nagarbhavi', 'Peenya', 'KR Puram'])
 
-type_of_name = st.multiselect('Type', ('Restaurant', 'Cafe', 'Hotel'))
+type_of_name = st.multiselect('Type', ['Restaurant', 'Cafe', 'Hotel'])
 
 
-rest_type_ge = st.multiselect('type of restaurant',('Casual Dining', 'Cafe', 'Quick Bites', 'Delivery', 'Mess',
+rest_type_ge = st.multiselect('type of restaurant',['Casual Dining', 'Cafe', 'Quick Bites', 'Delivery', 'Mess',
        'Dessert Parlor', 'Bakery', 'Pub', 'Fine Dining', 'Beverage Shop',
        'Sweet Shop', 'Bar', 'Kiosk', 'Food Truck', 'Microbrewery',
        'Lounge', 'Food Court', 'Dhaba', 'Club', 'Confectionery',
-       'Bhojanalya'))
+       'Bhojanalya'])
 
 
 #options 
 st.subheader('What are the services that you will provide? ')
 
-online_order = st.radio("Online ordering is available?: ", ('yes', 'no'))
-book_table = st.radio('Book Table is available',("yes","no")) 
+online_order = st.radio("Online ordering is available?: ", ['yes', 'no'])
+book_table = st.radio('Book Table is available',["yes","no"]) 
 
 
 # Transform selected options to numerical values
@@ -78,7 +73,7 @@ book_table_value = 1 if book_table == 'yes' else 0
 
 cost=st.slider('Cost For Two',1,10000,100)
 
-count_cuisines = st.slider("Number Of Cuisines ",1,8)
+count_cuisines = st.radio("Number Of Cuisines ",1,8)
 
 
 st.sidebar.subheader("About App")
