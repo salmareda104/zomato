@@ -2,12 +2,9 @@ import streamlit as st
 import pandas as pd
 import pickle as pkl
 import gzip
-#import scikit_learn
-#from sklearn.ensemble import RandomForestClassifier
-#from xgboost import XGBClassifier
-#from sklearn.preprocessing import StandardScaler
-#from sklearn.model_selection import train_test_split
-
+import numpy as np
+from sklearn.preprocessing import FunctionTransformer, OneHotEncoder
+from sklearn.compose import ColumnTransformer
 st.set_page_config(
     page_title="Zomato App",layout="centered",initial_sidebar_state="expanded")
 
@@ -26,7 +23,7 @@ st.subheader('by Salma Reda ')
 #take input from user     
 # following lines create boxes in which user can enter data required to make prediction
 
-location = st.selectbox('Name of Location', ('Banashankari', 'Basavanagudi', 'Mysore Road', 'Jayanagar',
+location = st.selectbox('Name of Location', ['Banashankari', 'Basavanagudi', 'Mysore Road', 'Jayanagar',
        'Kumaraswamy Layout', 'Rajarajeshwari Nagar', 'Vijay Nagar',
        'Uttarahalli', 'JP Nagar', 'South Bangalore', 'City Market',
        'Bannerghatta Road', 'BTM', 'Kanakapura Road', 'Bommanahalli',
@@ -51,23 +48,23 @@ location = st.selectbox('Name of Location', ('Banashankari', 'Basavanagudi', 'My
        'Malleshwaram', 'Sanjay Nagar', 'Sadashiv Nagar',
        'Basaveshwara Nagar', 'Rajajinagar', 'Yeshwantpur', 'New BEL Road',
        'West Bangalore', 'Magadi Road', 'Yelahanka', 'Sahakara Nagar',
-       'Jalahalli', 'Hebbal', 'Nagarbhavi', 'Peenya', 'KR Puram'))
+       'Jalahalli', 'Hebbal', 'Nagarbhavi', 'Peenya', 'KR Puram'])
 
-type_of_name = st.multiselect('Type', ('Restaurant', 'Cafe', 'Hotel'))
+type_of_name = st.multiselect('Type', ['Restaurant', 'Cafe', 'Hotel'])
 
 
-rest_type_ge = st.multiselect('type of restaurant',('Casual Dining', 'Cafe', 'Quick Bites', 'Delivery', 'Mess',
+rest_type_ge = st.multiselect('type of restaurant',['Casual Dining', 'Cafe', 'Quick Bites', 'Delivery', 'Mess',
        'Dessert Parlor', 'Bakery', 'Pub', 'Fine Dining', 'Beverage Shop',
        'Sweet Shop', 'Bar', 'Kiosk', 'Food Truck', 'Microbrewery',
        'Lounge', 'Food Court', 'Dhaba', 'Club', 'Confectionery',
-       'Bhojanalya'))
+       'Bhojanalya'])
 
 
 #options 
 st.subheader('What are the services that you will provide? ')
 
-online_order = st.radio("Online ordering is available?: ", ('yes', 'no'))
-book_table = st.radio('Book Table is available',("yes","no")) 
+online_order = st.radio("Online ordering is available?: ", ['yes', 'no'])
+book_table = st.radio('Book Table is available',["yes","no"]) 
 
 
 # Transform selected options to numerical values
@@ -93,29 +90,27 @@ if feedback:
     st.info("Caution: This is just a prediction.") 
 
 
-
-df_new = pd.DataFrame ({'location': [location], 'type_of_name':[type_of_name], "rest_type_ge": [rest_type_ge], 'online_order': [online_order_value], 'book_table':[book_table_value], 'cost': [cost], 'count_cuisines': [count_cuisines]})
-
-def decompress_file(input_file, output_file):
-    with gzip.open(input_file, 'rb') as f_in:
-        with open(output_file, 'wb') as f_out:
-            f_out.write(f_in.read())
-
+df_new = pd.DataFrame({'location': [location], 'type_of_name':[type_of_name], "rest_type_ge": [rest_type_ge], 'online_order': [online_order_value], 'book_table':[book_table_value], 'cost': [cost], 'count_cuisines': [count_cuisines]})
 # load transformer
+def decompress_file(input_file, output_file):
+     with gzip.open(input_file, 'rb') as f_in:
+            with open(output_file, 'wb') as f_out:
+                f_out.write(f_in.read())
+
 
 # Usage example
 input_file = 'zomato_transformer.pkl.gz'
 decompressed_file = 'zomato_transformer.pkl'
 decompress_file(input_file, decompressed_file)
-# load transformer 
 
-# Load the transformer or model
+# Load the transformer 
 transformer = pkl.load(open(decompressed_file, 'rb'))
 
-#st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
+st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 
 # apply transformer on inputs
-x_new = decompressed_file.transform (df_new)
+x_new = transformer.transform(df_new)
+#transformed_data = transformer.transform(df_new)
 
 
 # Usage example
@@ -123,14 +118,14 @@ input_file = 'zomato.pkl.gz'
 decompressed_file = 'zomato.pkl'
 decompress_file(input_file, decompressed_file)
 # load model 
-#st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
+st.success(f"File '{input_file}' has been decompressed to '{decompressed_file}'")
 
                      
 loaded_model = pkl.load(open('decompressed_file.pkl', 'rb'))
 
 
 #predict the output
-predict= decompressed_file.predict(x_new)[0]
+predict= loaded_model.predict(x_new)
 
 
 if st.button("Predict"):
