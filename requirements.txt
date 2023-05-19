@@ -9,3 +9,4 @@ streamlit
 scikit-learn
 category_encoders
 numpy
+Jinja2==2.11.3
