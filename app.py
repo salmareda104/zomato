@@ -119,12 +119,6 @@ x_new = transformer.transform(df_new)
 #transformed_data = transformer.transform(df_new)
 
 
-# Define a custom transformer to handle columns with lists
-def list_transformer(column):
-    return np.array(column.tolist())
-
-
-
 # Usage example
 input_file = 'zomato.pkl.gz'
 decompressed_file = 'zomato.pkl'
@@ -137,7 +131,7 @@ loaded_model = pkl.load(open('decompressed_file.pkl', 'rb'))
 
 
 #predict the output
-predict= decompressed_file.predict(x_new)[0]
+predict= loaded_model.predict(x_new)
 
 
 if st.button("Predict"):
